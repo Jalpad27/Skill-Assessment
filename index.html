@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    
+<h1>Weather report for Missouri  </h1>
+<h3 id="result"></h3>
+    
+
+<script>
+
+
+    /* Fetch API */
+
+window.addEventListener('load', loadData);
+var resultData = [];
+function loadData() {
+  const url = "https://api.weather.gov/alerts/active?area=MO";
+ 
+    fetch(url)
+        .then(response => { 
+  console.log(response)
+            return response.json(); 
+        })
+        .then(data => {
+      debugger;
+               
+     for(let objVal of data.features)  {
+               
+               
+          resultData.push(objVal.properties.headline);
+             var item = document.createElement('p')      ;
+       item.innerHTML = objVal.properties.headline;
+       item.style.backgroundColor = 'lightBlue'
+                 document.getElementById('result').appendChild(item);
+    }
+      
+      console.log(resultData);
+          
+       
+    } );
+    
+}
+               
+ 
+</script>
+</body>
+</html>
